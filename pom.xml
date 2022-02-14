@@ -20,6 +20,7 @@
 
     <modules>
         <module>concurrency-in-practice</module>
+        <module>leetcode-demo</module>
     </modules>
 
     <dependencies>
