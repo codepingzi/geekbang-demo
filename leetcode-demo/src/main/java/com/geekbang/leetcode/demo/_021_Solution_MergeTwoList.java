@@ -18,7 +18,7 @@ public class _021_Solution_MergeTwoList {
         ListNode listNode21 = new ListNode(1, listNode23);
 
         _021_Solution_MergeTwoList solution = new _021_Solution_MergeTwoList();
-        ListNode listNode = solution.mergeTwoLists_01(listNode11, listNode21);
+        ListNode listNode = solution.mergeTwoLists_02(listNode11, listNode21);
         solution.print(listNode);
     }
 
@@ -26,6 +26,30 @@ public class _021_Solution_MergeTwoList {
         while(listNode!=null){
             System.out.println(listNode.val);
             listNode = listNode.next;
+        }
+    }
+
+    /**
+     * 递归方式
+     * 终止条件: 两个链表都为null
+     * 如何递归: 判断l1和l2链表的头节点, 哪个更小, 然后较小的节点的next指向其余节点的集合,
+     * @param listNode1
+     * @param listNode2
+     * @return
+     */
+    public ListNode mergeTwoLists_02(ListNode listNode1, ListNode listNode2){
+        if (listNode1 == null){
+            return listNode2;
+        }else if(listNode2 == null){
+            return listNode1;
+        }
+
+        if (listNode1.val <= listNode2.val){
+            listNode1.next = mergeTwoLists_02(listNode1.next, listNode2);
+            return listNode1;
+        }else{
+            listNode2.next = mergeTwoLists_02(listNode1, listNode2.next);
+            return listNode2;
         }
     }
 
