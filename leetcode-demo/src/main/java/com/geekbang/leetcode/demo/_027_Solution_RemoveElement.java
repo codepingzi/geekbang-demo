@@ -1,5 +1,7 @@
 package com.geekbang.leetcode.demo;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
  *
@@ -45,7 +47,11 @@ package com.geekbang.leetcode.demo;
 public class _027_Solution_RemoveElement {
 
     public static void main(String[] args) {
-
+        int[] a = new int[] {0,1,2,2,3,0,4,2};
+        int val = 2;
+        _027_Solution_RemoveElement test = new _027_Solution_RemoveElement();
+        System.out.println(test.removeElement1(a, 2));
+        System.out.println(JSON.toJSONString(a));
     }
 
     /**
@@ -63,20 +69,26 @@ public class _027_Solution_RemoveElement {
             return 0;
         }
 
-        int p = -1;
-        int q = 1;
+        int p = 0;
+        int q = nums.length - 1;
 
-        if (nums[0] == val){
-            p = 0;
-        }
+        while(p <= q){
+            if (nums[p] == val){
+                while(nums[q] == val && q > p){
+                    q--;
+                }
 
-        while(q < nums.length){
-            if (nums[q] == val){
-                p = q;
+                if (nums[q] != val){
+                    nums[p] = nums[q];
+                    nums[q] = val;
+                    q--;
+                }
             }
-
-
-            q++;
+            if (p == q){
+                break;
+            }
+            p++;
         }
+        return p;
     }
 }
