@@ -50,7 +50,7 @@ public class _027_Solution_RemoveElement {
         int[] a = new int[] {0,1,2,2,3,0,4,2};
         int val = 2;
         _027_Solution_RemoveElement test = new _027_Solution_RemoveElement();
-        System.out.println(test.removeElement1(a, 2));
+        System.out.println(test.removeElement2(a, 2));
         System.out.println(JSON.toJSONString(a));
     }
 
@@ -69,26 +69,38 @@ public class _027_Solution_RemoveElement {
             return 0;
         }
 
-        int p = 0;
-        int q = nums.length - 1;
+        int left = 0;
 
-        while(p <= q){
-            if (nums[p] == val){
-                while(nums[q] == val && q > p){
-                    q--;
+        for (int right = 0; right < nums.length; right++){
+            if (nums[right] != val){
+                if (right != left){
+                    nums[left] = nums[right];
                 }
-
-                if (nums[q] != val){
-                    nums[p] = nums[q];
-                    nums[q] = val;
-                    q--;
-                }
+                left++;
             }
-            if (p == q){
-                break;
-            }
-            p++;
         }
-        return p;
+        return left;
+    }
+
+    /**
+     * 双指针优化
+     *
+     * @param nums
+     * @param val
+     * @return
+     */
+    private int removeElement2(int[] nums, int val){
+        int left = 0;
+        int right = nums.length;
+
+        while(left < right){
+            if (nums[left] == val){
+                nums[left] = nums[right - 1];
+                right--;
+            }else{
+                left++;
+            }
+        }
+        return left;
     }
 }
