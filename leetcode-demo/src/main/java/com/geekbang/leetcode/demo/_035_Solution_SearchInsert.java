@@ -18,7 +18,7 @@ public class _035_Solution_SearchInsert {
 
         int[] nums = new int[]{1, 2, 3, 4, 5};
 
-        System.out.println(test.searchInsert(nums, 1));
+        System.out.println(test.searchInsert(nums, 6));
     }
 
     private int searchInsert(int[] nums, int target){
@@ -26,7 +26,7 @@ public class _035_Solution_SearchInsert {
         int right = nums.length - 1;
 
         while(left <= right){
-            int middle = (left + right) / 2;
+            int middle = left + (right - left) / 2;
             if(target <= nums[middle]){
                 right = middle - 1;
             }else{
