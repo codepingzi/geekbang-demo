@@ -12,8 +12,13 @@ public class _226_Solution_InvertTree {
 
     }
 
-    public TreeNode invertTree(TreeNode root){
-        if (root == null){
+    /**
+     * 反转 => 递归
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
             return null;
         }
 
@@ -21,14 +26,25 @@ public class _226_Solution_InvertTree {
         root.left = root.right;
         root.right = tmpTreeNode;
 
-        if (root.left != null){
-            invertTree(root.left);
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
+
+    /**
+     * 递归 => 反转
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree2(TreeNode root) {
+        if (root == null) {
+            return null;
         }
 
-        if (root.right != null){
-            invertTree(root.right);
-        }
-
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.left = right;
+        root.right = left;
         return root;
     }
 }
